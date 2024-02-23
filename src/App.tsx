@@ -1,10 +1,16 @@
 import { Container } from "reactstrap";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Home } from "./components/Home";
 
 function App() {
+  const queryClient = new QueryClient();
+
   return (
-    <Container fluid className="text-center">
-      Hello, World.
-    </Container>
+    <QueryClientProvider client={queryClient}>
+      <Container fluid className="d-flex justify-content-center">
+        <Home />
+      </Container>
+    </QueryClientProvider>
   );
 }
 
