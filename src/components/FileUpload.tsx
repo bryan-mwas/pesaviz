@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import React, { useState } from "react";
-import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+import { Form, FormGroup, Label, Input, Button, Alert } from "reactstrap";
 import axiosClient from "../service/axios.instance";
 import axios from "axios";
 
@@ -87,7 +87,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload }) => {
           onChange={handlePasswordChange}
         />
       </FormGroup>
-      {error && <p className="text-danger">{error}</p>}
+      {error && <Alert color="danger">{error}</Alert>}
       <Button type="submit" color="primary">
         Upload
       </Button>

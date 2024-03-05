@@ -2,11 +2,16 @@ import { Progress } from "reactstrap";
 import { useGetTaskResult } from "../service/getTaskResult";
 import FileUpload from "./FileUpload";
 import { useState } from "react";
+import { Navigate } from "react-router-dom";
 
 export function Home() {
   const [taskID, setTaskID] = useState("");
 
-  const { data, isPending } = useGetTaskResult(taskID);
+  const { data } = useGetTaskResult(taskID);
+
+  if (data?.ready) {
+    localStorage.setItem("jsonReport", JSON.stringify(data.data));
+  }
 
   const handleFileUpload = (taskID: string) => {
     setTaskID(taskID);
@@ -14,7 +19,6 @@ export function Home() {
   return (
     <div className="w-50">
       <FileUpload onUpload={handleFileUpload} />
-      {isPending ? "Pending" : "Else"}
       {data?.state === "PROGRESS" ? (
         <>
           <div className="text-center">Doing Sayans</div>
@@ -30,7 +34,7 @@ export function Home() {
           />
         </>
       ) : data?.ready ? (
-        <pre>{JSON.stringify(data, null, 2)}</pre>
+        <Navigate to={"/report"} />
       ) : null}
     </div>
   );

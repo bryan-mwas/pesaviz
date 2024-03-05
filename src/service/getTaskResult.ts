@@ -2,18 +2,20 @@ import { useQuery } from "@tanstack/react-query";
 import axiosClient from "./axios.instance";
 import { API_URL } from "../utils/constant";
 
+export interface Transaction {
+  category: string;
+  completion_time: string;
+  amount: string;
+  recipient_id: string;
+  recipient_name: string;
+}
+
 export type TaskResult = {
   state: string;
   info?: { done: string; total: string };
   ready?: boolean;
   successful?: string;
-  data?: {
-    category: string;
-    completion_time: string;
-    amount: string;
-    recipient_id: string;
-    recipient_name: string;
-  };
+  data?: Transaction[];
 };
 
 export const useGetTaskResult = (taskID: string) => {
