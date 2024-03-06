@@ -5,7 +5,7 @@ import { API_URL } from "../utils/constant";
 export interface Transaction {
   category: string;
   completion_time: string;
-  amount: string;
+  amount: number;
   recipient_id: string;
   recipient_name: string;
 }
