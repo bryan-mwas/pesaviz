@@ -9,6 +9,7 @@ import {
 import { ResponsiveBar } from "@nivo/bar";
 import { Col, Row } from "reactstrap";
 import { PieComponent } from "./Pie";
+import { CHART_THEME } from "../utils/nivo.config";
 
 export function Dashboard() {
   const report: Transaction[] = JSON.parse(
@@ -26,9 +27,10 @@ export function Dashboard() {
 
   return (
     <Row style={{ height: "100vh", width: "100vw" }}>
-      <Col md={10}>
+      <Col md={6} sm={12} style={{ height: "50vh" }}>
         <ResponsiveBar
           data={chartData}
+          theme={CHART_THEME}
           keys={["Paybill", "Merchant Payment", "Send Money", "Charge"]}
           indexBy="month"
           margin={{ top: 50, right: 130, bottom: 50, left: 75 }}
@@ -129,7 +131,7 @@ export function Dashboard() {
           ariaLabel="Nivo bar chart demo"
         />
       </Col>
-      <Col>
+      <Col md={6} sm={12} style={{ height: "50vh" }}>
         <PieComponent data={transformToPieChartData(catSummary)} />
       </Col>
     </Row>

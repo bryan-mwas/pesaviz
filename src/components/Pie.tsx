@@ -1,4 +1,5 @@
 import { ResponsivePie } from "@nivo/pie";
+import { CHART_THEME } from "../utils/nivo.config";
 
 export function PieComponent(props: { data: { id: string; value: number }[] }) {
   return (
@@ -23,6 +24,7 @@ export function PieComponent(props: { data: { id: string; value: number }[] }) {
       arcLinkLabelsColor={{ from: "color" }}
       arcLabelsSkipAngle={10}
       arcLabelsTextColor={{ from: "color", modifiers: [["darker", 2]] }}
+      theme={CHART_THEME}
     />
   );
 }

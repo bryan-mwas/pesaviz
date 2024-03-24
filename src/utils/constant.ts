@@ -4,7 +4,7 @@ export const sortByMonthOrder = (
   a: { month: string },
   b: { month: string }
 ) => {
-  const monthOrder = {
+  const monthOrder: Record<string, number> = {
     Jan: 1,
     Feb: 2,
     Mar: 3,
