@@ -9,13 +9,14 @@
 
 import { Theme } from "@nivo/core";
 
+const APP_FONT = "Inter";
 /**
  * @type ThemeWithoutInheritance
  */
 export const CHART_THEME: Theme = {
   background: "#ffffff",
   text: {
-    fontFamily: "Inter",
+    fontFamily: APP_FONT,
     fontSize: 11,
     fill: "#333333",
     outlineWidth: 0,
@@ -30,7 +31,7 @@ export const CHART_THEME: Theme = {
     },
     legend: {
       text: {
-        fontFamily: "Inter",
+        fontFamily: APP_FONT,
         fontSize: 12,
         fill: "#333333",
         outlineWidth: 0,
@@ -43,7 +44,7 @@ export const CHART_THEME: Theme = {
         strokeWidth: 1,
       },
       text: {
-        fontFamily: "Inter",
+        fontFamily: APP_FONT,
         fontSize: 11,
         fill: "#333333",
         outlineWidth: 0,
@@ -60,7 +61,7 @@ export const CHART_THEME: Theme = {
   legends: {
     title: {
       text: {
-        fontFamily: "Inter",
+        fontFamily: APP_FONT,
         fontSize: 11,
         fill: "#333333",
         outlineWidth: 0,
@@ -68,7 +69,7 @@ export const CHART_THEME: Theme = {
       },
     },
     text: {
-      fontFamily: "Inter",
+      fontFamily: APP_FONT,
       fontSize: 11,
       fill: "#333333",
       outlineWidth: 0,
@@ -86,7 +87,7 @@ export const CHART_THEME: Theme = {
   },
   annotations: {
     text: {
-      fontFamily: "Inter",
+      fontFamily: APP_FONT,
       fontSize: 13,
       fill: "#333333",
       outlineWidth: 2,
@@ -118,7 +119,7 @@ export const CHART_THEME: Theme = {
     container: {
       background: "#ffffff",
       color: "#333333",
-      fontFamily: "Inter",
+      fontFamily: APP_FONT,
       fontSize: 12,
     },
     basic: {},

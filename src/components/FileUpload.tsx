@@ -69,6 +69,10 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload }) => {
 
   return (
     <Form onSubmit={handleSubmit}>
+      <div>
+        <span className="h4">Time to get in your bag</span>{" "}
+        <span className="vector_emoji">💰</span>
+      </div>
       <FormGroup>
         <Label for="file">Select File (PDF only)</Label>
         <Input
