@@ -10,12 +10,17 @@ export interface Transaction {
   recipient_name: string;
 }
 
+type InfoResult = {
+  done: string;
+  total: string;
+};
+
 export type TaskResult = {
   state: string;
-  info?: { done: string; total: string };
   ready?: boolean;
-  successful?: string;
-  data?: Transaction[];
+  successful?: boolean;
+  failed?: boolean;
+  result?: Transaction[] | InfoResult;
 };
 
 export const useGetTaskResult = (taskID: string) => {
