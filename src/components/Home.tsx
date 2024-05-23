@@ -1,8 +1,8 @@
-import { Progress } from "reactstrap";
 import { useGetTaskResult } from "../service/getTaskResult";
 import FileUpload from "./FileUpload";
 import { useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
+import { Progress } from "flowbite-react";
 
 export function Home() {
   const [taskID, setTaskID] = useState("");
@@ -22,20 +22,18 @@ export function Home() {
   };
 
   return (
-    <div className="w-50">
+    <div className="flex justify-center">
       <FileUpload onUpload={handleFileUpload} />
       {data?.state === "PROGRESS" && !Array.isArray(data.result) ? (
         <>
           <div className="text-center">Doing Sayans</div>
           <Progress
-            animated
-            color="info"
-            striped
-            value={(
+            labelProgress
+            progress={
               (parseInt(data.result?.done || "0") /
                 parseInt(data.result?.total || "0")) *
               100
-            ).toFixed(0)}
+            }
           />
         </>
       ) : null}

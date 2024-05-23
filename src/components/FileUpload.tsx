@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import React, { useState } from "react";
-import { Form, FormGroup, Label, Input, Button, Alert } from "reactstrap";
 import axiosClient from "../service/axios.instance";
 import axios from "axios";
+import { Button, Label, TextInput, Alert, FileInput } from "flowbite-react";
 
 interface FileUploadProps {
   onUpload: (taskID: string) => void;
@@ -68,34 +68,42 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="w-1/2">
       <div>
         <span className="h4">Time to get in your bag</span>{" "}
         <span className="vector_emoji">💰</span>
       </div>
-      <FormGroup>
-        <Label for="file">Select File (PDF only)</Label>
-        <Input
-          type="file"
-          id="file"
-          accept=".pdf"
-          onChange={handleFileChange}
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label for="password">Password</Label>
-        <Input
+      <div>
+        <div className="mb-2 block">
+          <Label htmlFor="file">Select File (PDF only)</Label>
+        </div>
+        <FileInput id="file" accept=".pdf" onChange={handleFileChange} />
+      </div>
+      <div>
+        <div className="mb-2 block">
+          <Label htmlFor="password">Password</Label>
+        </div>
+        <TextInput
           type="password"
           id="password"
-          value={password}
           onChange={handlePasswordChange}
         />
-      </FormGroup>
-      {error && <Alert color="danger">{error}</Alert>}
-      <Button type="submit" color="primary">
+      </div>
+
+      {error && (
+        <Alert color="failure" className="my-2">
+          {error}
+        </Alert>
+      )}
+
+      <Button
+        type="submit"
+        className="bg-slate-900 my-4 float-end
+      "
+      >
         Upload
       </Button>
-    </Form>
+    </form>
   );
 };
 
