@@ -68,7 +68,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-1/2">
+    <form onSubmit={handleSubmit}>
       <div>
         <span className="h4">Time to get in your bag</span>{" "}
         <span className="vector_emoji">💰</span>
@@ -77,7 +77,12 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload }) => {
         <div className="mb-2 block">
           <Label htmlFor="file">Select File (PDF only)</Label>
         </div>
-        <FileInput id="file" accept=".pdf" onChange={handleFileChange} />
+        <FileInput
+          id="file"
+          accept=".pdf"
+          onChange={handleFileChange}
+          required
+        />
       </div>
       <div>
         <div className="mb-2 block">
@@ -87,6 +92,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload }) => {
           type="password"
           id="password"
           onChange={handlePasswordChange}
+          required
         />
       </div>
 
@@ -96,11 +102,7 @@ const FileUpload: React.FC<FileUploadProps> = ({ onUpload }) => {
         </Alert>
       )}
 
-      <Button
-        type="submit"
-        className="bg-slate-900 my-4 float-end
-      "
-      >
+      <Button type="submit" className="my-4 float-start" size={"sm"}>
         Upload
       </Button>
     </form>

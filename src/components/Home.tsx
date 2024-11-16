@@ -2,7 +2,7 @@ import { useGetTaskResult } from "../service/getTaskResult";
 import FileUpload from "./FileUpload";
 import { useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
-import { Progress } from "flowbite-react";
+import { Alert, Progress } from "flowbite-react";
 
 export function Home() {
   const [taskID, setTaskID] = useState("");
@@ -11,7 +11,7 @@ export function Home() {
   const { data } = useGetTaskResult(taskID);
 
   if (data?.ready && data.successful) {
-    localStorage.setItem("jsonReport", JSON.stringify(data.result));
+    localStorage.setItem("jsonReport", JSON.stringify(data.response));
     navigate({
       to: "/report",
     });
@@ -22,20 +22,25 @@ export function Home() {
   };
 
   return (
-    <div className="flex justify-center">
+    <div className="grid px-6 sm:px-48 ">
       <FileUpload onUpload={handleFileUpload} />
-      {data?.state === "PROGRESS" && !Array.isArray(data.result) ? (
-        <>
-          <div className="text-center">Doing Sayans</div>
-          <Progress
-            labelProgress
-            progress={
-              (parseInt(data.result?.done || "0") /
-                parseInt(data.result?.total || "0")) *
-              100
-            }
-          />
-        </>
+      {data?.failed && (
+        <Alert color={"failure"}>{data?.response as string}</Alert>
+      )}
+      {data?.state === "PROGRESS" ? (
+        <Progress
+          labelProgress
+          labelText
+          progressLabelPosition="outside"
+          textLabel="Doing Sayans"
+          textLabelPosition="outside"
+          size={"xl"}
+          progress={
+            (parseInt(data.response?.done || "0") /
+              parseInt(data.response?.total || "0")) *
+            100
+          }
+        />
       ) : null}
     </div>
   );

@@ -37,6 +37,16 @@ export const transformToPieChartData = (
   });
 };
 
+export function filteredCategory(transactions: Transaction[], year: string) {
+  return _.chain(transactions)
+    .filter(
+      (transaction) =>
+        getDateMonth(transaction.completion_time, "YYYY") === year
+    )
+    .groupBy("category")
+    .value();
+}
+
 export const getTransactionSummaryByMonth = (
   transactions: Transaction[],
   year: string
@@ -79,4 +89,22 @@ export const getTransactionSummaryByCategory = (
     .value();
   const result = _.mapValues(groups, (catGroup) => _.sumBy(catGroup, "amount"));
   return result;
+};
+
+export const mPesaGroup = (
+  transactions: Record<string, unknown[]> | undefined
+) => {
+  if (!transactions) {
+    return [];
+  }
+  return Object.keys(transactions).reduce(
+    (acc, key) => {
+      if (!acc[key]) {
+        const res = _.groupBy(transactions[key], "recipient_name");
+        acc[key] = _.mapValues(res, (it) => _.sumBy(it, "amount"));
+      }
+      return acc;
+    },
+    {} as Record<string, unknown>
+  );
 };

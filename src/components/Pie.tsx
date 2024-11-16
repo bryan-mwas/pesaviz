@@ -25,6 +25,7 @@ export function PieComponent(props: { data: { id: string; value: number }[] }) {
       arcLabelsSkipAngle={10}
       arcLabelsTextColor={{ from: "color", modifiers: [["darker", 2]] }}
       theme={CHART_THEME}
+      sortByValue={true}
     />
   );
 }

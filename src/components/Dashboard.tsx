@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { Transaction } from "../service/getTaskResult";
 import {
+  filteredCategory,
   getTransactionSummaryByCategory,
   getTransactionSummaryByMonth,
+  mPesaGroup,
   transformToBarChartData,
   transformToPieChartData,
 } from "../service/reports.service";
@@ -15,17 +17,16 @@ export function Dashboard() {
     localStorage.getItem("jsonReport") as string
   );
 
-  const summary = getTransactionSummaryByMonth(report, "2022");
-  const catSummary = getTransactionSummaryByCategory(report, "2022");
+  const summary = getTransactionSummaryByMonth(report, "2024");
+  const catSummary = getTransactionSummaryByCategory(report, "2024");
+  console.log(mPesaGroup(filteredCategory(report, "2024")));
   console.log(transformToPieChartData(catSummary));
   const chartData = transformToBarChartData(summary);
-
-  console.log("BBB", chartData);
 
   useEffect(() => {}, [report]);
 
   return (
-    <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-3 min-h-screen">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 min-h-screen">
       <div>
         <Bar
           data={chartData}
@@ -38,7 +39,12 @@ export function Dashboard() {
           groupMode="stacked"
           indexScale={{ type: "band", round: true }}
           colors={{ scheme: "dark2" }}
-          valueFormat={" >-.2f"}
+          valueFormat={(v) =>
+            v.toLocaleString("en-US", {
+              style: "currency",
+              currency: "KES",
+            })
+          }
           defs={[
             {
               id: "dots",
